@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   n8n:
-    image: n8n-puppeteer:latest  # ton image custom avec Puppeteer
+    image: n8n-puppeteer:latest
     container_name: n8n-puppeteer
     restart: always
     ports:
@@ -16,8 +16,8 @@ services:
       - N8N_PORT=5678
       - N8N_EDITOR_BASE_URL=http://localhost:5678
       - NODE_ENV=production
-# volumes:
-#   - ~/.n8n:/home/node/.n8n
+    volumes:
+      - /home/qge/.n8n:/home/node/.n8n  # ⚠️ adapte ce chemin si besoin
     cap_add:
       - SYS_ADMIN
     security_opt:
