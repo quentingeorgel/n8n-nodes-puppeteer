@@ -16,8 +16,8 @@ services:
       - N8N_PORT=5678
       - N8N_EDITOR_BASE_URL=http://localhost:5678
       - NODE_ENV=production
-    volumes:
-      - ~/.n8n:/home/node/.n8n
+# volumes:
+#   - ~/.n8n:/home/node/.n8n
     cap_add:
       - SYS_ADMIN
     security_opt:
