@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     image: n8n-puppeteer
     ports:
-      - "5678:5678"
+      - "5680:5678"
     volumes:
       - n8n_data:/home/node/.n8n
     environment:
