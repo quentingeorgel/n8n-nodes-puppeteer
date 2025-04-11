@@ -1,20 +1,26 @@
-version: "3.7"
+version: "3.8"
 
 services:
   n8n:
-    build:
-      context: ./docker
-      dockerfile: Dockerfile
-    image: n8n-puppeteer
+    image: n8n-puppeteer:latest  # ton image custom avec Puppeteer
+    container_name: n8n-puppeteer
+    restart: always
     ports:
       - "5680:5678"
-    volumes:
-      - n8n_data:/home/node/.n8n
     environment:
+      - DB_TYPE=sqlite
       - N8N_BASIC_AUTH_ACTIVE=true
       - N8N_BASIC_AUTH_USER=admin
-      - N8N_BASIC_AUTH_PASSWORD=securepassword
-      - N8N_COMMUNITY_PACKAGES=n8n-nodes-puppeteer
-
-volumes:
-  n8n_data:
+      - N8N_BASIC_AUTH_PASSWORD=admin
+      - N8N_HOST=localhost
+      - N8N_PORT=5678
+      - N8N_EDITOR_BASE_URL=http://localhost:5678
+      - NODE_ENV=production
+    volumes:
+      - ~/.n8n:/home/node/.n8n
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
